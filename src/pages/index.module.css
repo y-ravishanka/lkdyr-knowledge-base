@@ -3,21 +3,106 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  position: relative;
-  overflow: hidden;
+  padding: 3.5rem 1rem 2.5rem;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
+.heroArt {
+  width: 220px;
+  max-width: 60vw;
+  height: auto;
+  margin-bottom: 1.25rem;
+}
+
+.heroTitle {
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.75rem;
   }
 }
 
-.buttons {
+.bookshelfSection {
+  padding: 1rem 0 4rem;
+}
+
+.bookshelfTitle {
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.bookshelfGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.bookCard {
   display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: var(--ifm-card-border-radius);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bookCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.bookCardIcon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.bookCardTitle {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.bookCardDescription {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+}
+
+.bookCardMore {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: var(--ifm-card-border-radius);
+  border: 1px dashed var(--ifm-color-emphasis-400);
+  color: var(--ifm-color-emphasis-600);
+}
+
+.bookCardMore p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.bookshelfMore {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
 }

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 340" width="100%" height="100%" role="img" aria-label="Illustration of a boy sitting cross-legged reading a book">
+  <ellipse cx="200" cy="312" rx="140" ry="16" fill="#2e8555" opacity="0.12"/>
+
+  <circle cx="200" cy="150" r="150" fill="#2e8555" opacity="0.06"/>
+
+  <g>
+    <path d="M120 300 C110 250 130 210 170 205 L230 205 C270 210 290 250 280 300 Z" fill="#2e8555"/>
+
+    <path d="M150 240 C110 250 90 285 95 300 L145 300 C150 275 155 255 150 240 Z" fill="#29784c"/>
+    <path d="M250 240 C290 250 310 285 305 300 L255 300 C250 275 245 255 250 240 Z" fill="#29784c"/>
+
+    <path d="M120 300 C130 285 150 280 170 285 L165 300 Z" fill="#205d3b"/>
+    <path d="M280 300 C270 285 250 280 230 285 L235 300 Z" fill="#205d3b"/>
+
+    <rect x="150" y="235" width="100" height="70" rx="6" fill="#ffffff" stroke="#29784c" stroke-width="3"/>
+    <line x1="200" y1="235" x2="200" y2="305" stroke="#29784c" stroke-width="3"/>
+    <path d="M155 245 L195 240 L195 298 L155 293 Z" fill="#eafaf1"/>
+    <path d="M245 245 L205 240 L205 298 L245 293 Z" fill="#eafaf1"/>
+    <line x1="163" y1="252" x2="188" y2="249" stroke="#9fd8bb" stroke-width="2"/>
+    <line x1="163" y1="262" x2="188" y2="260" stroke="#9fd8bb" stroke-width="2"/>
+    <line x1="163" y1="272" x2="185" y2="270" stroke="#9fd8bb" stroke-width="2"/>
+    <line x1="237" y1="252" x2="212" y2="249" stroke="#9fd8bb" stroke-width="2"/>
+    <line x1="237" y1="262" x2="212" y2="260" stroke="#9fd8bb" stroke-width="2"/>
+    <line x1="237" y1="272" x2="215" y2="270" stroke="#9fd8bb" stroke-width="2"/>
+
+    <circle cx="200" cy="130" r="55" fill="#ffd9ae"/>
+
+    <path d="M147 120 C142 80 165 55 200 55 C235 55 258 80 253 120 C248 100 235 90 220 92 C230 82 220 70 200 72 C180 70 170 82 180 92 C165 90 152 100 147 120 Z" fill="#3b2a20"/>
+
+    <circle cx="180" cy="132" r="5" fill="#3b2a20"/>
+    <circle cx="220" cy="132" r="5" fill="#3b2a20"/>
+    <path d="M172 118 Q180 112 188 118" stroke="#3b2a20" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M212 118 Q220 112 228 118" stroke="#3b2a20" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M190 152 Q200 160 210 152" stroke="#8a5a3b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="168" cy="145" r="7" fill="#ffb994" opacity="0.6"/>
+    <circle cx="232" cy="145" r="7" fill="#ffb994" opacity="0.6"/>
+
+    <path d="M150 235 C130 220 120 200 130 185 C145 175 165 195 168 220 Z" fill="#ffd9ae"/>
+    <path d="M250 235 C270 220 280 200 270 185 C255 175 235 195 232 220 Z" fill="#ffd9ae"/>
+  </g>
+</svg>

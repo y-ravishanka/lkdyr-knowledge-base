@@ -1,42 +1,70 @@
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+const bookshelfPosts = [
+  {
+    title: 'Deployment',
+    description:
+      'Deploy an application to a Linux environment using NGINX and PM2 on Ubuntu 22.',
+    link: '/docs/linux/Deployment',
+  },
+  {
+    title: 'MS SQL Server in Linux (Ubuntu 22 Server)',
+    description:
+      'Install and configure MS SQL Server 2022 on an Ubuntu 22 Server environment.',
+    link: '/docs/linux/ms-sql-server-for-ubuntu22',
+  },
+];
+
+function BookshelfSection() {
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <section className={styles.bookshelfSection}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
+        <Heading as="h2" className={styles.bookshelfTitle}>
+          From the Bookshelf
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+        <div className={styles.bookshelfGrid}>
+          {bookshelfPosts.map((post) => (
+            <Link key={post.link} to={post.link} className={styles.bookCard}>
+              <span className={styles.bookCardIcon}>📖</span>
+              <Heading as="h3" className={styles.bookCardTitle}>
+                {post.title}
+              </Heading>
+              <p className={styles.bookCardDescription}>{post.description}</p>
+            </Link>
+          ))}
+          <div className={styles.bookCardMore}>
+            <span className={styles.bookCardIcon}>✍️</span>
+            <p>More entries coming soon</p>
+          </div>
+        </div>
+        <div className={styles.bookshelfMore}>
+          <Link className="button button--primary button--lg" to="/docs/linux/Deployment">
+            Browse the Bookshelf
           </Link>
         </div>
       </div>
-    </header>
+    </section>
   );
 }
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
+      title="My Knowledge Base"
+      description="lkdyrkb — a personal knowledge base">
       <main>
-        <HomepageFeatures />
+        <section className={styles.heroSection}>
+          <img
+            src="/img/boy-reading.svg"
+            alt="Boy reading a book"
+            className={styles.heroArt}
+          />
+          <h1 className={styles.heroTitle}>My Knowledge Base</h1>
+        </section>
+        <BookshelfSection />
       </main>
     </Layout>
   );

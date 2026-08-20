@@ -4,31 +4,76 @@ sidebar_position: 1
 
 # Deployment
 
-Deploy an application to a Linux Environment. This is a issue and a lesson every software engineer have to face at a one point of his career. So, in this tutorial let's discuss how to deploy an application to a Linux environment. 
+Deploying an application to a Linux environment is a task every software engineer has to face at some point in their career. In this tutorial, let's discuss how to deploy an application to a Linux environment.
 
-As the Linux environment I will be using `Ubuntu 22`, and for deployment I will be using `NGINX` and `PM2`. as those are one of the best, stable and tested deployment platforms.
+As the Linux environment, we'll be using `Ubuntu 22`, and for deployment we'll be using `NGINX` and `PM2`, as these are among the most stable and well-tested deployment tools.
 
 ## 1. Install and Configure NGINX
 
-### 1. Install NGINX
+### 1.1 Install NGINX
 
-First of all let's install NGINX. Use following command to install the nginx.
-```
+First, let's install NGINX using the following command:
+
+```bash
 sudo apt install nginx
 ```
-*for more detail installation introductions, please visit [here](https://nginx.org/en/linux_packages.html).*
 
-Now lets't check if NGINX is running correctly using the following command.
-```
+*For more detailed installation instructions, please visit [here](https://nginx.org/en/linux_packages.html).*
+
+Now let's check if NGINX is running correctly:
+
+```bash
 sudo systemctl status nginx
 ```
 
-### 2. Configure NGINX for the site.
+### 1.2 Configure NGINX for the Site
 
-Now lets't configure NGINX to redirect request you get to your server to the application. First of all you have to create a configuration file for nginx. even through you can edit the default nginx config but its recommended to create a new config file for each application so, configs and sites can be maintain correctly.
+Now let's configure NGINX to forward requests to your application. Although you can edit the default NGINX config, it's recommended to create a new config file for each application so configs and sites can be maintained correctly.
 
+Create the NGINX site config file:
 
+```bash
+sudo nano /etc/nginx/sites-available/app.example.com
+```
 
+Edit the config file:
 
+```nginx
+server {
+    listen 80;
+    server_name app.example.com;
 
+    location / {
+        proxy_pass http://127.0.0.1:<port>;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_read_timeout 300s;
+        proxy_connect_timeout 300s;
+        proxy_send_timeout 300s;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
 
+*Make sure your application is running on `http://127.0.0.1:<port>`.*
+
+Enable the config file:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/app.example.com /etc/nginx/sites-enabled/
+```
+
+Test the NGINX config:
+
+```bash
+sudo nginx -t
+```
+
+Reload the NGINX config:
+
+```bash
+sudo systemctl reload nginx
+```

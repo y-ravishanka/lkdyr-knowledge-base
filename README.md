@@ -1,41 +1,7 @@
-# Website
+# lkdyr Knowledge Base
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+This is my personal knowledge base — a place where I collect, organize, and share new things I learn that I think I'll need again in the future. Whenever I come across something worth remembering (a fix, a concept, a how-to), it goes here so I don't have to relearn it, and so anyone else who stumbles on it might learn something too.
 
-## Installation
+It's publicly accessible at [kb.lkdyr.com](https://kb.lkdyr.com).
 
-```bash
-yarn
-```
-
-## Local Development
-
-```bash
-yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
-
-```bash
-yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-Using SSH:
-
-```bash
-USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+Built with [Docusaurus](https://docusaurus.io/).

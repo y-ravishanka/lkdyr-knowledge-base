@@ -1,5 +1,6 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
+description: Install and configure MS SQL Server 2022 on an Ubuntu 22 Server environment.
 ---
 
 # MS SQL Server in Linux (Ubuntu 22 Server)

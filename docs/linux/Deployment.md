@@ -1,5 +1,6 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
+description: Deploy an application to Ubuntu 22 using NGINX as a reverse proxy and PM2 as the process manager.
 ---
 
 # Deployment

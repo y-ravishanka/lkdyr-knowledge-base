@@ -1,70 +1,169 @@
+import {useMemo, useState} from 'react';
 import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
-const bookshelfPosts = [
-  {
-    title: 'Deployment',
-    description:
-      'Deploy an application to a Linux environment using NGINX and PM2 on Ubuntu 22.',
-    link: '/docs/linux/Deployment',
-  },
-  {
-    title: 'MS SQL Server in Linux (Ubuntu 22 Server)',
-    description:
-      'Install and configure MS SQL Server 2022 on an Ubuntu 22 Server environment.',
-    link: '/docs/linux/ms-sql-server-for-ubuntu22',
-  },
-];
+const DEFAULT_ICON = '📄';
 
-function BookshelfSection() {
+function StatPill({value, label}) {
   return (
-    <section className={styles.bookshelfSection}>
-      <div className="container">
-        <Heading as="h2" className={styles.bookshelfTitle}>
-          From the Bookshelf
+    <div className={styles.statPill}>
+      <span className={styles.statValue}>{value}</span>
+      <span className={styles.statLabel}>{label}</span>
+    </div>
+  );
+}
+
+function GuideCard({doc}) {
+  return (
+    <Link to={doc.permalink} className={styles.guideCard}>
+      <div className={styles.guideCardBody}>
+        {doc.category && (
+          <span className={styles.guideCardBadge}>{doc.category}</span>
+        )}
+        <Heading as="h3" className={styles.guideCardTitle}>
+          {doc.title}
         </Heading>
-        <div className={styles.bookshelfGrid}>
-          {bookshelfPosts.map((post) => (
-            <Link key={post.link} to={post.link} className={styles.bookCard}>
-              <span className={styles.bookCardIcon}>📖</span>
-              <Heading as="h3" className={styles.bookCardTitle}>
-                {post.title}
-              </Heading>
-              <p className={styles.bookCardDescription}>{post.description}</p>
-            </Link>
-          ))}
-          <div className={styles.bookCardMore}>
-            <span className={styles.bookCardIcon}>✍️</span>
-            <p>More entries coming soon</p>
-          </div>
+        {doc.description && (
+          <p className={styles.guideCardDescription}>{doc.description}</p>
+        )}
+      </div>
+      <span className={styles.guideCardArrow} aria-hidden="true">
+        →
+      </span>
+    </Link>
+  );
+}
+
+function CategorySection({section}) {
+  return (
+    <section className={styles.categorySection}>
+      <div className={styles.categoryHeader}>
+        <span className={styles.categoryIcon} aria-hidden="true">
+          {section.icon || DEFAULT_ICON}
+        </span>
+        <div>
+          <Heading as="h2" className={styles.categoryTitle}>
+            {section.label}
+          </Heading>
+          {section.description && (
+            <p className={styles.categoryDescription}>{section.description}</p>
+          )}
         </div>
-        <div className={styles.bookshelfMore}>
-          <Link className="button button--primary button--lg" to="/docs/linux/Deployment">
-            Browse the Bookshelf
-          </Link>
-        </div>
+        <span className={styles.categoryCount}>
+          {section.docs.length} guide{section.docs.length === 1 ? '' : 's'}
+        </span>
+      </div>
+      <div className={styles.guideGrid}>
+        {section.docs.map((doc) => (
+          <GuideCard key={doc.permalink} doc={doc} />
+        ))}
       </div>
     </section>
   );
 }
 
-export default function Home() {
+function SearchResults({query, allDocs}) {
+  const term = query.trim().toLowerCase();
+  const results = allDocs.filter(
+    (doc) =>
+      doc.title.toLowerCase().includes(term) ||
+      doc.description?.toLowerCase().includes(term)
+  );
+
   return (
-    <Layout
-      title="My Knowledge Base"
-      description="lkdyrkb — a personal knowledge base">
+    <section className={styles.categorySection}>
+      <div className={styles.categoryHeader}>
+        <span className={styles.categoryIcon} aria-hidden="true">
+          🔎
+        </span>
+        <div>
+          <Heading as="h2" className={styles.categoryTitle}>
+            Results for &ldquo;{query.trim()}&rdquo;
+          </Heading>
+        </div>
+        <span className={styles.categoryCount}>
+          {results.length} match{results.length === 1 ? '' : 'es'}
+        </span>
+      </div>
+      {results.length > 0 ? (
+        <div className={styles.guideGrid}>
+          {results.map((doc) => (
+            <GuideCard key={doc.permalink} doc={doc} />
+          ))}
+        </div>
+      ) : (
+        <p className={styles.noResults}>
+          No guides matched. Try a different keyword.
+        </p>
+      )}
+    </section>
+  );
+}
+
+export default function Home() {
+  const {siteConfig} = useDocusaurusContext();
+  const [query, setQuery] = useState('');
+
+  const sections = siteConfig.customFields?.guidesData ?? [];
+  const allDocs = useMemo(
+    () =>
+      sections.flatMap((section) =>
+        section.docs.map((doc) => ({...doc, category: section.label}))
+      ),
+    [sections]
+  );
+
+  return (
+    <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <main>
         <section className={styles.heroSection}>
+          <div className={styles.heroGlow} aria-hidden="true" />
           <img
             src="/img/boy-reading.svg"
             alt="Boy reading a book"
             className={styles.heroArt}
           />
-          <h1 className={styles.heroTitle}>My Knowledge Base</h1>
+          <h1 className={styles.heroTitle}>{siteConfig.title}</h1>
+          <p className={styles.heroSubtitle}>
+            A living collection of hands-on guides — updated as new notes are
+            added.
+          </p>
+
+          <div className={styles.searchWrapper}>
+            <span className={styles.searchIcon} aria-hidden="true">
+              ⌕
+            </span>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search guides..."
+              className={styles.searchInput}
+              aria-label="Search guides"
+            />
+          </div>
+
+          <div className={styles.statsRow}>
+            <StatPill value={allDocs.length} label="Guides" />
+            <StatPill value={sections.length} label="Categories" />
+            <StatPill value="OSS" label="Free & open" />
+          </div>
         </section>
-        <BookshelfSection />
+
+        <div className={styles.contentArea}>
+          {query.trim() ? (
+            <SearchResults query={query} allDocs={allDocs} />
+          ) : sections.length > 0 ? (
+            sections.map((section) => (
+              <CategorySection key={section.label} section={section} />
+            ))
+          ) : (
+            <p className={styles.noResults}>No guides published yet.</p>
+          )}
+        </div>
       </main>
     </Layout>
   );
